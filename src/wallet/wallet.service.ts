@@ -168,6 +168,23 @@ export class WalletService {
           amount: Config.MINIMUM_BNB_GAS,
           to: req.address,
         });
+
+        //Check gas balance
+        await new Promise((res) => {
+          const balanceInterval = setInterval(async () => {
+            console.log('CHECK INTERVAL');
+            const balance = await this.getBalance({
+              address: req.address,
+            });
+
+            console.log(balance);
+
+            if (balance.bnb >= Config.MINIMUM_BNB_GAS) {
+              res(1);
+              clearInterval(balanceInterval);
+            }
+          }, 3000);
+        });
       }
 
       //Send transaction
