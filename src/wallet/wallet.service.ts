@@ -199,7 +199,5 @@ export class WalletService {
     } catch (error) {
       throw error;
     }
-
-    return {};
   }
 }
