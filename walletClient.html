@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="connectWallet()">CONNET WALLET</button>
+  <button onclick="createTransaction()">CREATE TRANSACTION</button>
+  <script>
+    let wallet;
+    const connectWallet = async () => {
+      wallet = await window.trustwallet.request({
+        method: "eth_requestAccounts"
+      });
+    }
+
+    const createTransaction = async () => {
+      window.trustwallet
+        .request({
+          method: 'eth_sendTransaction',
+          params: [{
+            "from": "0x1d74a846e35cfdf72ae1a25655e368127baa47b7",
+            "to": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
+            "gas": "0x33450",
+            "gasPrice": "0x2540be400",
+            "data": "0xa9059cbb000000000000000000000000f767b985a4ecc3855fea4fb3d600191e87596f52000000000000000000000000000000000000000000000000016345785d8a0000"
+          }]
+        })
+        .then((result) => {
+          alert("Transfer successfully!!!");
+        })
+        .catch((error) => {
+          alert(`ERROR: ${error.message}`);
+        });
+    }
+  </script>
+</body>
+
+</html>

@@ -6,6 +6,7 @@ import TransferDTO from './dto/transfer.dto';
 import CheckTransactionDTO from './dto/check-transaction.dto';
 import GetGasEstimateDTO from './dto/get-gas-estimate.dto';
 import TransferGasDTO from './dto/transfer-gas.dto';
+import CreateTransferObjectDTO from './dto/create-transfer-object.dto';
 export declare class WalletService {
     private readonly web3Service;
     constructor(web3Service: Web3Service);
@@ -28,4 +29,11 @@ export declare class WalletService {
     gasEstimate(req: GetGasEstimateDTO): Promise<number>;
     transferGas(req: TransferGasDTO): Promise<string>;
     transfer(req: TransferDTO): Promise<import("web3-core").TransactionReceipt>;
+    createTransactionObject(req: CreateTransferObjectDTO): Promise<{
+        from: string;
+        to: string;
+        gas: string;
+        gasPrice: string;
+        data: any;
+    }>;
 }

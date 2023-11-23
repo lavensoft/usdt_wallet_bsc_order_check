@@ -14,6 +14,7 @@ import GetTransactionDTO from './dto/get-transaction.dto';
 import Config from 'src/config/config';
 import TransferDTO from './dto/transfer.dto';
 import CheckTransactionDTO from './dto/check-transaction.dto';
+import CreateTransferObjectDTO from './dto/create-transfer-object.dto';
 
 @Controller('wallets')
 export class WalletController {
@@ -129,6 +130,21 @@ export class WalletController {
       console.log(e);
       return new HttpException(
         'Failed to get transactions!',
+        HttpStatus.FORBIDDEN,
+      );
+    }
+  }
+
+  @Post('create-transaction-object')
+  async createTransactionObject(@Body() body: CreateTransferObjectDTO) {
+    try {
+      const txObject = await this.walletService.createTransactionObject(body);
+
+      return txObject;
+    } catch (e) {
+      console.log(e);
+      return new HttpException(
+        'Failed to create transaction!',
         HttpStatus.FORBIDDEN,
       );
     }

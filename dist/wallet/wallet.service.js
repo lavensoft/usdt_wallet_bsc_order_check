@@ -137,6 +137,18 @@ let WalletService = class WalletService {
             throw error;
         }
     }
+    async createTransactionObject(req) {
+        const amount = this.client.utils.toHex(this.client.utils.toWei(req.amount.toString(), 'ether'));
+        const data = this.usdtContract.methods.transfer(req.to, amount).encodeABI();
+        const txObject = {
+            from: req.address,
+            to: config_1.default.USDT_ADDRESS,
+            gas: this.client.utils.toHex(210000),
+            gasPrice: this.client.utils.toHex(await this.client.eth.getGasPrice()),
+            data: data,
+        };
+        return txObject;
+    }
 };
 exports.WalletService = WalletService;
 exports.WalletService = WalletService = __decorate([

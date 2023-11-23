@@ -103,6 +103,16 @@ let WalletController = class WalletController {
             return new common_1.HttpException('Failed to get transactions!', common_1.HttpStatus.FORBIDDEN);
         }
     }
+    async createTransactionObject(body) {
+        try {
+            const txObject = await this.walletService.createTransactionObject(body);
+            return txObject;
+        }
+        catch (e) {
+            console.log(e);
+            return new common_1.HttpException('Failed to create transaction!', common_1.HttpStatus.FORBIDDEN);
+        }
+    }
 };
 exports.WalletController = WalletController;
 __decorate([
@@ -143,6 +153,13 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], WalletController.prototype, "checkTransaction", null);
+__decorate([
+    (0, common_1.Post)('create-transaction-object'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], WalletController.prototype, "createTransactionObject", null);
 exports.WalletController = WalletController = __decorate([
     (0, common_1.Controller)('wallets'),
     __metadata("design:paramtypes", [wallet_service_1.WalletService])

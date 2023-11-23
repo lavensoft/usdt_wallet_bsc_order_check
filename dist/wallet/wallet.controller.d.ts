@@ -3,6 +3,7 @@ import { WalletService } from './wallet.service';
 import GetTransactionDTO from './dto/get-transaction.dto';
 import TransferDTO from './dto/transfer.dto';
 import CheckTransactionDTO from './dto/check-transaction.dto';
+import CreateTransferObjectDTO from './dto/create-transfer-object.dto';
 export declare class WalletController {
     private walletService;
     constructor(walletService: WalletService);
@@ -27,5 +28,12 @@ export declare class WalletController {
         transaction: {
             amount: number;
         };
+    }>;
+    createTransactionObject(body: CreateTransferObjectDTO): Promise<HttpException | {
+        from: string;
+        to: string;
+        gas: string;
+        gasPrice: string;
+        data: any;
     }>;
 }

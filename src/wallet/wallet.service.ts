@@ -9,6 +9,7 @@ import TransferDTO from './dto/transfer.dto';
 import CheckTransactionDTO from './dto/check-transaction.dto';
 import GetGasEstimateDTO from './dto/get-gas-estimate.dto';
 import TransferGasDTO from './dto/transfer-gas.dto';
+import CreateTransferObjectDTO from './dto/create-transfer-object.dto';
 
 @Injectable()
 export class WalletService {
@@ -199,5 +200,22 @@ export class WalletService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async createTransactionObject(req: CreateTransferObjectDTO) {
+    const amount = this.client.utils.toHex(
+      this.client.utils.toWei(req.amount.toString(), 'ether'),
+    );
+    const data = this.usdtContract.methods.transfer(req.to, amount).encodeABI();
+
+    const txObject = {
+      from: req.address,
+      to: Config.USDT_ADDRESS,
+      gas: this.client.utils.toHex(210000), // Replace with appropriate gas value
+      gasPrice: this.client.utils.toHex(await this.client.eth.getGasPrice()),
+      data: data,
+    };
+
+    return txObject;
   }
 }
