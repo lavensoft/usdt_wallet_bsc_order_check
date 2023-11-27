@@ -1,14 +1,14 @@
 export default class Config {
   static MINIMUM_BNB_GAS = 0.006;
-  static FEE_WALLET_ADDRESS = '0xF767b985A4ECC3855fEA4fB3d600191E87596F52';
+  static FEE_WALLET_ADDRESS = '0x866532FA79c9696EFb7B6Fd44DfA3f4f2A3c1074';
   static FEE_WALLET_PRIV_KEY =
-    'fde1771f6ac1da1ab63ef63b9b0348d20b49d035d66bd4c8f7d98dabef5cda7e';
+    '0xc9e1b064bbe97a33dae5fff181f19bbf2b841d9d2c9ad19e473c7277f73266df';
 
-  static BSC_END_POINT = 'https://data-seed-prebsc-1-s1.bnbchain.org:8545';
-  static BSC_SC_END_POINT = 'https://api-testnet.bscscan.com/api';
+  static BSC_END_POINT = 'https://bsc-dataseed.bnbchain.org';
+  static BSC_SC_END_POINT = 'https://api.bscscan.com/api';
   static BSC_SC_API_KEY = 'YourApiKey';
   static BSC_CLIENT = 'bsc';
-  static USDT_ADDRESS = '0x337610d27c682E347C9cD60BD4b3b107C9d34dDd';
+  static USDT_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
   static USDT_ABI = [
     {
       inputs: [],
@@ -141,10 +141,19 @@ export default class Config {
       type: 'function',
     },
     {
+      constant: false,
+      inputs: [{ internalType: 'uint256', name: 'amount', type: 'uint256' }],
+      name: 'burn',
+      outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+      payable: false,
+      stateMutability: 'nonpayable',
+      type: 'function',
+    },
+    {
       constant: true,
       inputs: [],
       name: 'decimals',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      outputs: [{ internalType: 'uint8', name: '', type: 'uint8' }],
       payable: false,
       stateMutability: 'view',
       type: 'function',

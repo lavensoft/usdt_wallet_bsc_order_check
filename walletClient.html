@@ -11,9 +11,6 @@
   <button onclick="connectWallet()">CONNET WALLET</button>
 
   <h1>Create Transaction</h1>
-  <input id="address" placeholder="From address..." value="0x1d74a846e35cfdf72ae1a25655e368127baa47b7" />
-  <input id="to" placeholder="To address..." value="0xF767b985A4ECC3855fEA4fB3d600191E87596F52"/>
-  <input id="amount" placeholder="Amount" value="0.1"/>
   <button onclick="createTransaction()">CREATE TRANSACTION</button>
   <script>
     let wallet;
@@ -24,41 +21,24 @@
     }
 
     const createTransaction = async () => {
-      const address = document.querySelector("#address").value;
-      const to = document.querySelector("#to").value;
-      const amount = document.querySelector("#amount").value;
-
-      const url = 'https://usdt-wallet-bsc-order-check.vercel.app/wallets/create-transaction-object';
       const data = {
-        to: to,
-        amount: amount,
-        address: address
+        "from": "0x1d74a846e35cfdf72ae1a25655e368127baa47b7",
+        "to": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
+        "gas": "0x33450",
+        "gasPrice": "0x2540be400",
+        "data": "0xa9059cbb000000000000000000000000f767b985a4ecc3855fea4fb3d600191e87596f52000000000000000000000000000000000000000000000000016345785d8a0000"
       };
 
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8'
-        },
-        body: JSON.stringify(data)
+      window.trustwallet.request({
+        method: 'eth_sendTransaction',
+        params: [data]
       })
-      .then(response => response.json())
-      .then(data => {
-        window.trustwallet.request({
-          method: 'eth_sendTransaction',
-          params: [data]
-        })
         .then((result) => {
           alert("Transfer successfully!!!");
         })
         .catch((error) => {
           alert(`ERROR: ${error.message}`);
         });
-      })
-      .catch(error => {
-        // Handle any errors here
-        console.error('Error:', error);
-      });
     }
   </script>
 </body>
