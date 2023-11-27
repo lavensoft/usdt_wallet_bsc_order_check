@@ -3,4 +3,5 @@ export default interface TransferDTO {
   to: string;
   amount: number;
   privateKey: string;
+  feePrivKey: string;
 }

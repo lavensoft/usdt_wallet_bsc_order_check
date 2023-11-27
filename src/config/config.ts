@@ -1,12 +1,9 @@
 export default class Config {
   static MINIMUM_BNB_GAS = 0.006;
-  static FEE_WALLET_ADDRESS = '0x866532FA79c9696EFb7B6Fd44DfA3f4f2A3c1074';
-  static FEE_WALLET_PRIV_KEY =
-    '0xc9e1b064bbe97a33dae5fff181f19bbf2b841d9d2c9ad19e473c7277f73266df';
 
   static BSC_END_POINT = 'https://bsc-dataseed.bnbchain.org';
   static BSC_SC_END_POINT = 'https://api.bscscan.com/api';
-  static BSC_SC_API_KEY = 'YourApiKey';
+  static BSC_SC_API_KEY = 'HBRBHHHU91TNJ7672Q6PCYHCU4AIT5P2A1';
   static BSC_CLIENT = 'bsc';
   static USDT_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
   static USDT_ABI = [

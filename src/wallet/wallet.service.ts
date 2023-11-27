@@ -48,6 +48,8 @@ export class WalletService {
       `${Config.BSC_SC_END_POINT}?module=account&action=tokentx&contractaddress=${req.contractAddress}&address=${req.address}&page=${req.page}&offset=${req.offset}&apikey=${Config.BSC_SC_API_KEY}&sort=${req.sort}`,
     );
 
+    console.log(res.data.result);
+
     return (res?.data?.result || []).map((i: any) => ({
       timeStamp: i.timeStamp,
       from: i.from,
@@ -109,7 +111,7 @@ export class WalletService {
 
   async transferGas(req: TransferGasDTO) {
     const senderAddress = this.client.eth.accounts.privateKeyToAccount(
-      Config.FEE_WALLET_PRIV_KEY,
+      req.feePrivKey,
     ).address;
 
     const nonce = await this.client.eth.getTransactionCount(senderAddress);
@@ -125,7 +127,7 @@ export class WalletService {
 
     const signedTx = await this.client.eth.accounts.signTransaction(
       txObject,
-      Config.FEE_WALLET_PRIV_KEY,
+      req.feePrivKey,
     );
 
     const tx = await this.client.eth.sendSignedTransaction(
@@ -168,6 +170,7 @@ export class WalletService {
         await this.transferGas({
           amount: Config.MINIMUM_BNB_GAS,
           to: req.address,
+          feePrivKey: req.feePrivKey,
         });
 
         //Check gas balance

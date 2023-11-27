@@ -38,6 +38,7 @@ let WalletService = class WalletService {
     }
     async getTransactions(req) {
         const res = await axios_1.default.get(`${config_1.default.BSC_SC_END_POINT}?module=account&action=tokentx&contractaddress=${req.contractAddress}&address=${req.address}&page=${req.page}&offset=${req.offset}&apikey=${config_1.default.BSC_SC_API_KEY}&sort=${req.sort}`);
+        console.log(res.data.result);
         return (res?.data?.result || []).map((i) => ({
             timeStamp: i.timeStamp,
             from: i.from,
