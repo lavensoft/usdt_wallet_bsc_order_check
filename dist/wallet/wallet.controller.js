@@ -105,6 +105,7 @@ let WalletController = class WalletController {
     }
     async createTransactionObject(body) {
         try {
+            console.log(body);
             const txObject = await this.walletService.createTransactionObject(body);
             return txObject;
         }

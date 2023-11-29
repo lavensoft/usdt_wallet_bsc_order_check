@@ -138,6 +138,7 @@ export class WalletController {
   @Post('create-transaction-object')
   async createTransactionObject(@Body() body: CreateTransferObjectDTO) {
     try {
+      console.log(body);
       const txObject = await this.walletService.createTransactionObject(body);
 
       return txObject;

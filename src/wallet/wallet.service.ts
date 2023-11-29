@@ -206,6 +206,7 @@ export class WalletService {
   }
 
   async createTransactionObject(req: CreateTransferObjectDTO) {
+    console.log(req);
     const amount = this.client.utils.toHex(
       this.client.utils.toWei(req.amount.toString(), 'ether'),
     );
@@ -213,7 +214,7 @@ export class WalletService {
 
     const txObject = {
       from: req.address,
-      to: Config.USDT_ADDRESS,
+      to: req.to,
       gas: this.client.utils.toHex(210000), // Replace with appropriate gas value
       gasPrice: this.client.utils.toHex(await this.client.eth.getGasPrice()),
       data: data,
