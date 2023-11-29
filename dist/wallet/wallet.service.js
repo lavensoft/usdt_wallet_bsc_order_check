@@ -147,7 +147,6 @@ let WalletService = class WalletService {
         const txObject = {
             nonce: this.client.utils.toHex(nonce),
             gasLimit: this.client.utils.toHex(50000),
-            from: req.address,
             to: config_1.default.USDT_ADDRESS,
             gasPrice: this.client.utils.toHex(await this.client.eth.getGasPrice()),
             data: data,

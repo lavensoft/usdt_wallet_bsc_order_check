@@ -216,7 +216,7 @@ export class WalletService {
     const txObject = {
       nonce: this.client.utils.toHex(nonce),
       gasLimit: this.client.utils.toHex(50000), // Giới hạn gas
-      from: req.address,
+      // from: req.address,
       to: Config.USDT_ADDRESS,
       // gas: this.client.utils.toHex(210000), // Replace with appropriate gas value
       gasPrice: this.client.utils.toHex(await this.client.eth.getGasPrice()),

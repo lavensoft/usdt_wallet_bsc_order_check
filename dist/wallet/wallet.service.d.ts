@@ -32,7 +32,6 @@ export declare class WalletService {
     createTransactionObject(req: CreateTransferObjectDTO): Promise<{
         nonce: string;
         gasLimit: string;
-        from: string;
         to: string;
         gasPrice: string;
         data: any;

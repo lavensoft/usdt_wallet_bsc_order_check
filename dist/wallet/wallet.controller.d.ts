@@ -32,7 +32,6 @@ export declare class WalletController {
     createTransactionObject(body: CreateTransferObjectDTO): Promise<HttpException | {
         nonce: string;
         gasLimit: string;
-        from: string;
         to: string;
         gasPrice: string;
         data: any;
