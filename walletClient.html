@@ -22,12 +22,14 @@
 
     const createTransaction = async () => {
       const data = {
-        "from": "0x4b0b67c063d4af7ca1c8274b42ff4d3af3e26f1d",
-        "to": "0x3321E84F5fC3298318a1340707e686854E68B22e",
-        "gas": "0x33450",
-        "gasPrice": "0xb2d05e00",
-        "data": "0xa9059cbb0000000000000000000000003321e84f5fc3298318a1340707e686854e68b22e000000000000000000000000000000000000000000000000016345785d8a0000"
-      };
+  "nonce": "0x5",
+  "gasLimit": "0xc350",
+  "from": "0x1d74A846e35cFdf72Ae1A25655e368127BAA47b7",
+  "to": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
+  "gasPrice": "0x2422a4100",
+  "data": "0xa9059cbb000000000000000000000000f767b985a4ecc3855fea4fb3d600191e87596f52000000000000000000000000000000000000000000000000016345785d8a0000",
+  "value": "0x00"
+};
 
       window.trustwallet.request({
         method: 'eth_sendTransaction',

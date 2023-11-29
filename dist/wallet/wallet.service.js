@@ -141,14 +141,17 @@ let WalletService = class WalletService {
     }
     async createTransactionObject(req) {
         console.log(req);
+        const nonce = await this.client.eth.getTransactionCount(req.address);
         const amount = this.client.utils.toHex(this.client.utils.toWei(req.amount.toString(), 'ether'));
         const data = this.usdtContract.methods.transfer(req.to, amount).encodeABI();
         const txObject = {
+            nonce: this.client.utils.toHex(nonce),
+            gasLimit: this.client.utils.toHex(50000),
             from: req.address,
-            to: req.to,
-            gas: this.client.utils.toHex(210000),
+            to: config_1.default.USDT_ADDRESS,
             gasPrice: this.client.utils.toHex(await this.client.eth.getGasPrice()),
             data: data,
+            value: '0x00',
         };
         return txObject;
     }
