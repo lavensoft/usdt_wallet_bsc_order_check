@@ -30,10 +30,11 @@ export declare class WalletController {
         };
     }>;
     createTransactionObject(body: CreateTransferObjectDTO): Promise<HttpException | {
-        from: string;
+        nonce: string;
+        gasLimit: string;
         to: string;
-        gas: string;
         gasPrice: string;
         data: any;
+        value: string;
     }>;
 }

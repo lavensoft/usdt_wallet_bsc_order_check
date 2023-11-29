@@ -1,7 +1,5 @@
 export default class Config {
     static MINIMUM_BNB_GAS: number;
-    static FEE_WALLET_ADDRESS: string;
-    static FEE_WALLET_PRIV_KEY: string;
     static BSC_END_POINT: string;
     static BSC_SC_END_POINT: string;
     static BSC_SC_API_KEY: string;

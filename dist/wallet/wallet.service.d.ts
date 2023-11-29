@@ -30,10 +30,11 @@ export declare class WalletService {
     transferGas(req: TransferGasDTO): Promise<string>;
     transfer(req: TransferDTO): Promise<import("web3-core").TransactionReceipt>;
     createTransactionObject(req: CreateTransferObjectDTO): Promise<{
-        from: string;
+        nonce: string;
+        gasLimit: string;
         to: string;
-        gas: string;
         gasPrice: string;
         data: any;
+        value: string;
     }>;
 }

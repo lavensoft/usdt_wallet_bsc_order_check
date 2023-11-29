@@ -38,6 +38,7 @@ let WalletService = class WalletService {
     }
     async getTransactions(req) {
         const res = await axios_1.default.get(`${config_1.default.BSC_SC_END_POINT}?module=account&action=tokentx&contractaddress=${req.contractAddress}&address=${req.address}&page=${req.page}&offset=${req.offset}&apikey=${config_1.default.BSC_SC_API_KEY}&sort=${req.sort}`);
+        console.log(res.data.result);
         return (res?.data?.result || []).map((i) => ({
             timeStamp: i.timeStamp,
             from: i.from,
@@ -82,7 +83,7 @@ let WalletService = class WalletService {
         return gas;
     }
     async transferGas(req) {
-        const senderAddress = this.client.eth.accounts.privateKeyToAccount(config_1.default.FEE_WALLET_PRIV_KEY).address;
+        const senderAddress = this.client.eth.accounts.privateKeyToAccount(req.feePrivKey).address;
         const nonce = await this.client.eth.getTransactionCount(senderAddress);
         const txObject = {
             from: senderAddress,
@@ -92,7 +93,7 @@ let WalletService = class WalletService {
             gasPrice: this.client.utils.toWei('5', 'gwei'),
             nonce: nonce,
         };
-        const signedTx = await this.client.eth.accounts.signTransaction(txObject, config_1.default.FEE_WALLET_PRIV_KEY);
+        const signedTx = await this.client.eth.accounts.signTransaction(txObject, req.feePrivKey);
         const tx = await this.client.eth.sendSignedTransaction(signedTx.rawTransaction);
         return tx.transactionHash;
     }
@@ -114,6 +115,7 @@ let WalletService = class WalletService {
                 await this.transferGas({
                     amount: config_1.default.MINIMUM_BNB_GAS,
                     to: req.address,
+                    feePrivKey: req.feePrivKey,
                 });
                 await new Promise((res) => {
                     const balanceInterval = setInterval(async () => {
@@ -138,14 +140,17 @@ let WalletService = class WalletService {
         }
     }
     async createTransactionObject(req) {
+        console.log(req);
+        const nonce = await this.client.eth.getTransactionCount(req.address);
         const amount = this.client.utils.toHex(this.client.utils.toWei(req.amount.toString(), 'ether'));
         const data = this.usdtContract.methods.transfer(req.to, amount).encodeABI();
         const txObject = {
-            from: req.address,
+            nonce: this.client.utils.toHex(nonce),
+            gasLimit: this.client.utils.toHex(50000),
             to: config_1.default.USDT_ADDRESS,
-            gas: this.client.utils.toHex(210000),
             gasPrice: this.client.utils.toHex(await this.client.eth.getGasPrice()),
             data: data,
+            value: '0x00',
         };
         return txObject;
     }
