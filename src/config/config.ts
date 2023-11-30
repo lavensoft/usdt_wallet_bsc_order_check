@@ -1,11 +1,13 @@
 export default class Config {
   static MINIMUM_BNB_GAS = 0.006;
-
+  // static BSC_END_POINT = 'https://bsc-testnet-dataseed.bnbchain.org';
   static BSC_END_POINT = 'https://bsc-dataseed.bnbchain.org';
   static BSC_SC_END_POINT = 'https://api.bscscan.com/api';
+  // static BSC_SC_END_POINT = 'https://api-testnet.bscscan.com/api';
   static BSC_SC_API_KEY = 'HBRBHHHU91TNJ7672Q6PCYHCU4AIT5P2A1';
   static BSC_CLIENT = 'bsc';
   static USDT_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
+  // static USDT_ADDRESS = '0x337610d27c682E347C9cD60BD4b3b107C9d34dDd';
   static USDT_ABI = [
     {
       inputs: [],
