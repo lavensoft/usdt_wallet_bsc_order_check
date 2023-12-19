@@ -1,5 +1,5 @@
 export default class Config {
-  static MINIMUM_BNB_GAS = 0,0006;
+  static MINIMUM_BNB_GAS = 0,002;
   // static BSC_END_POINT = 'https://bsc-testnet-dataseed.bnbchain.org';
   static BSC_END_POINT = 'https://bsc-dataseed.bnbchain.org';
   static BSC_SC_END_POINT = 'https://api.bscscan.com/api';
